@@ -36,12 +36,14 @@
 
 /* USER CODE BEGIN Includes */
 
+#include "stm32f746xx.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+static __IO uint32_t TimingDelay;
 
 /* USER CODE END PV */
 
@@ -55,7 +57,8 @@ static void MX_GPIO_Init(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
+void user_SysTick_Handler(void);
+void Delay(uint32_t nTime);
 /* USER CODE END 0 */
 
 int main(void)
@@ -85,6 +88,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+      Delay(1000);
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
+      Delay(1000);
+      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
+      
+      
+      
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -162,6 +172,17 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void Delay(uint32_t nTime) {
+    TimingDelay = nTime;
+    while (TimingDelay != 0); 
+}
+
+void user_SysTick_Handler(void) {
+    if (TimingDelay != 0x00)
+        TimingDelay--;
+}
+
 
 /* USER CODE END 4 */
 

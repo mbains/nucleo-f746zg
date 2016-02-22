@@ -36,6 +36,7 @@
 #include "stm32f7xx_it.h"
 
 /* USER CODE BEGIN 0 */
+extern void user_SysTick_Handler(void);
 
 /* USER CODE END 0 */
 
@@ -56,7 +57,7 @@ void SysTick_Handler(void)
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+  user_SysTick_Handler();
   /* USER CODE END SysTick_IRQn 1 */
 }
 
