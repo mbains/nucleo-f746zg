@@ -967,11 +967,19 @@
             ex="false"
             tool="0"
             flavor2="2">
-        <cTool>
+        <cTool flags="0">
           <incDir>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Src</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
+            <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
             <pElem>Drivers/CMSIS/Include</pElem>
+            <pElem>Inc</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
+            <pElem>SW4STM32/nucleo Configuration/Debug</pElem>
           </incDir>
         </cTool>
       </item>
@@ -1968,8 +1976,8 @@
             <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
-            <pElem>Drivers/CMSIS/Include</pElem>
             <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
+            <pElem>Drivers/CMSIS/Include</pElem>
             <pElem>Inc</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>

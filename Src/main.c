@@ -35,7 +35,7 @@
 #include "lwip.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "stm32f7xx_hal_uart.h"
 #include "stm32f746xx.h"
 /* USER CODE END Includes */
 
@@ -90,9 +90,12 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t uart_data[20] = "data\r\n";
   while (1)
   {
       Delay(1000);
+      printf("test\r\n");
+      HAL_UART_Transmit(&huart3, uart_data, 6, 2000);
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 1);
       Delay(1000);
       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, 0);
