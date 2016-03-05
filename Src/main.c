@@ -37,6 +37,7 @@
 /* USER CODE BEGIN Includes */
 #include "stm32f7xx_hal_uart.h"
 #include "stm32f746xx.h"
+#include "tcp_echoserver.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -85,7 +86,8 @@ int main(void)
   MX_LWIP_Init();
 
   /* USER CODE BEGIN 2 */
-
+  Delay(5000);
+tcp_echoserver_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -93,6 +95,7 @@ int main(void)
   uint8_t uart_data[20] = "data\r\n";
   while (1)
   {
+      MX_LWIP_Process();
       Delay(1000);
       printf("test\r\n");
       HAL_UART_Transmit(&huart3, uart_data, 6, 2000);
