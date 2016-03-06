@@ -41,9 +41,6 @@
 
 /* ETH Variables initialization ----------------------------------------------*/
 
-uint32_t DHCPfineTimer = 0;
-uint32_t DHCPcoarseTimer = 0; 
-
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */
@@ -53,6 +50,9 @@ struct netif gnetif;
 struct ip_addr ipaddr;
 struct ip_addr netmask;
 struct ip_addr gw;
+uint8_t IP_ADDRESS[4];
+uint8_t NETMASK_ADDRESS[4];
+uint8_t GATEWAY_ADDRESS[4];
 
 /* USER CODE BEGIN 2 */
 
@@ -60,13 +60,26 @@ struct ip_addr gw;
 
 /* init function */
 void MX_LWIP_Init(void)
-{  /* Initilialize the LwIP stack */
+{
+  IP_ADDRESS[0] = 192;
+  IP_ADDRESS[1] = 168;
+  IP_ADDRESS[2] = 2;
+  IP_ADDRESS[3] = 150;
+  NETMASK_ADDRESS[0] = 255;
+  NETMASK_ADDRESS[1] = 255;
+  NETMASK_ADDRESS[2] = 255;
+  NETMASK_ADDRESS[3] = 0;
+  GATEWAY_ADDRESS[0] = 0;
+  GATEWAY_ADDRESS[1] = 0;
+  GATEWAY_ADDRESS[2] = 0;
+  GATEWAY_ADDRESS[3] = 0;
+    /* Initilialize the LwIP stack */
   lwip_init();
  
  
-  ipaddr.addr = 0;
-  netmask.addr = 0;
-  gw.addr = 0;
+  IP4_ADDR(&ipaddr, IP_ADDRESS[0], IP_ADDRESS[1], IP_ADDRESS[2], IP_ADDRESS[3]);
+  IP4_ADDR(&netmask, NETMASK_ADDRESS[0], NETMASK_ADDRESS[1] , NETMASK_ADDRESS[2], NETMASK_ADDRESS[3]);
+  IP4_ADDR(&gw, GATEWAY_ADDRESS[0], GATEWAY_ADDRESS[1], GATEWAY_ADDRESS[2], GATEWAY_ADDRESS[3]);  
   
 
   /* add the network interface */
@@ -86,9 +99,6 @@ void MX_LWIP_Init(void)
     /* When the netif link is down this function must be called */
        netif_set_down(&gnetif);
   }  
-  
-
-dhcp_start(&gnetif);
   
 
 /* USER CODE BEGIN 3 */
