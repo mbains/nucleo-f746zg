@@ -78,12 +78,12 @@
 //#define HAL_SPDIFRX_MODULE_ENABLED   
 //#define HAL_SPI_MODULE_ENABLED   
 //#define HAL_TIM_MODULE_ENABLED   
-//#define HAL_UART_MODULE_ENABLED   
+#define HAL_UART_MODULE_ENABLED
 //#define HAL_USART_MODULE_ENABLED   
 //#define HAL_IRDA_MODULE_ENABLED   
 //#define HAL_SMARTCARD_MODULE_ENABLED   
 //#define HAL_WWDG_MODULE_ENABLED   
-//#define HAL_PCD_MODULE_ENABLED   
+#define HAL_PCD_MODULE_ENABLED
 //#define HAL_HCD_MODULE_ENABLED   
 #define HAL_GPIO_MODULE_ENABLED
 #define HAL_DMA_MODULE_ENABLED
@@ -99,7 +99,7 @@
   *        (when HSE is used as system clock source, directly or through the PLL).  
   */
 #if !defined  (HSE_VALUE) 
-  #define HSE_VALUE    ((uint32_t)25000000) /*!< Value of the External oscillator in Hz */
+  #define HSE_VALUE    ((uint32_t)8000000) /*!< Value of the External oscillator in Hz */
 #endif /* HSE_VALUE */
 
 #if !defined  (HSE_STARTUP_TIMEOUT)
@@ -119,7 +119,7 @@
   * @brief Internal Low Speed oscillator (LSI) value.
   */
 #if !defined  (LSI_VALUE) 
- #define LSI_VALUE  ((uint32_t)32000)       /*!< LSI Typical Value in Hz*/
+ #define LSI_VALUE  ((uint32_t)40000)       /*!< LSI Typical Value in Hz*/
 #endif /* LSI_VALUE */                      /*!< Value of the Internal Low Speed oscillator in Hz
                                              The real value may vary depending on the variations
                                              in voltage and temperature.  */
