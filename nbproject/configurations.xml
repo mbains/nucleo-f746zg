@@ -1901,6 +1901,32 @@
           </incDir>
         </cTool>
       </item>
+      <item path="SW4STM32/nucleo Configuration/Application/User/tcp_echoserver.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+          <incDir>
+            <pElem>SW4STM32/nucleo Configuration/Application/User</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/system/arch</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/src/include/lwip</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/src/include/ipv4/lwip</pElem>
+            <pElem>Drivers/CMSIS/Include</pElem>
+            <pElem>Inc</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
+            <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/src/include</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/src/include/ipv4</pElem>
+            <pElem>Middlewares/Third_Party/LwIP/system</pElem>
+            <pElem>SW4STM32/nucleo Configuration/Debug</pElem>
+          </incDir>
+        </cTool>
+      </item>
       <item path="Src/ethernetif.c" ex="false" tool="0" flavor2="2">
         <cTool flags="0">
           <incDir>
