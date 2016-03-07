@@ -37,7 +37,7 @@
 
 
 /* USER CODE BEGIN Includes */
-
+#include "httpserver-netconn.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -88,7 +88,7 @@ int main(void)
   MX_GPIO_Init();
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
-  MX_LWIP_Init();
+  //MX_LWIP_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -129,7 +129,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-     MX_LWIP_Process();
+     //MX_LWIP_Process();
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
@@ -287,10 +287,12 @@ void StartDefaultTask(void const * argument)
   MX_LWIP_Init();
 
   /* USER CODE BEGIN 5 */
+  http_server_netconn_init();
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
+    HAL_UART_Transmit(&huart3, "Test\r\n",6,100);
   }
   /* USER CODE END 5 */ 
 }
