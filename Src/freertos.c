@@ -1,9 +1,9 @@
 /**
- ******************************************************************************
-  * File Name          : ethernetif.h
-  * Description        : This file provides initialization code for LWIP
-  *                      middleWare.
   ******************************************************************************
+  * File Name          : freertos.c
+  * Description        : Code for freertos applications
+  ******************************************************************************
+  *
   * COPYRIGHT(c) 2016 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
@@ -27,42 +27,34 @@
   * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  *
   ******************************************************************************
   */
-  
 
-#ifndef __ETHERNETIF_H__
-#define __ETHERNETIF_H__
+/* Includes ------------------------------------------------------------------*/
+#include "FreeRTOS.h"
+#include "task.h"
 
-#include "lwip/err.h"
-#include "lwip/netif.h"
-#include "cmsis_os.h"
+/* USER CODE BEGIN Includes */     
 
-/* Exported types ------------------------------------------------------------*/
-/* Structure that include link thread parameters */
-struct link_str {
-  struct netif *netif;
-  osSemaphoreId semaphore;
-};
+/* USER CODE END Includes */
 
-/* Within 'USER CODE' section, code will be kept by default at each generation */
-/* USER CODE BEGIN 0 */
+/* Variables -----------------------------------------------------------------*/
 
-/* USER CODE END 0 */
+/* USER CODE BEGIN Variables */
 
-/* Exported functions ------------------------------------------------------- */
-err_t ethernetif_init(struct netif *netif);
+/* USER CODE END Variables */
 
-void ethernetif_input( void const * argument ); 
- 
+/* Function prototypes -------------------------------------------------------*/
 
-void ethernetif_set_link(void const *argument);
-void ethernetif_update_config(struct netif *netif);
-void ethernetif_notify_conn_changed(struct netif *netif);
+/* USER CODE BEGIN FunctionPrototypes */
 
-/* USER CODE BEGIN 1 */
+/* USER CODE END FunctionPrototypes */
 
-/* USER CODE END 1 */
-#endif
+/* Hook prototypes */
+
+/* USER CODE BEGIN Application */
+     
+/* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

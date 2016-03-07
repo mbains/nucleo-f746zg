@@ -73,9 +73,8 @@ void MX_LWIP_Init(void)
   GATEWAY_ADDRESS[1] = 0;
   GATEWAY_ADDRESS[2] = 0;
   GATEWAY_ADDRESS[3] = 0;
-    /* Initilialize the LwIP stack */
-  lwip_init();
- 
+   
+  tcpip_init( NULL, NULL );	
  
   IP4_ADDR(&ipaddr, IP_ADDRESS[0], IP_ADDRESS[1], IP_ADDRESS[2], IP_ADDRESS[3]);
   IP4_ADDR(&netmask, NETMASK_ADDRESS[0], NETMASK_ADDRESS[1] , NETMASK_ADDRESS[2], NETMASK_ADDRESS[3]);
@@ -83,7 +82,7 @@ void MX_LWIP_Init(void)
   
 
   /* add the network interface */
-  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &ethernet_input);
+  netif_add(&gnetif, &ipaddr, &netmask, &gw, NULL, &ethernetif_init, &tcpip_input);
  
  
   /*  Registers the default network interface */
