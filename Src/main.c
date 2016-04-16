@@ -38,6 +38,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "httpserver-netconn.h"
+#include "stm32f746xx.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
