@@ -87,31 +87,6 @@
       </df>
       <df name="Middlewares">
         <df name="Third_Party">
-          <df name="FreeRTOS">
-            <df name="Source">
-              <df name="CMSIS_RTOS">
-                <in>cmsis_os.c</in>
-              </df>
-              <df name="portable">
-                <df name="GCC">
-                  <df name="ARM_CM7">
-                    <df name="r0p1">
-                      <in>port.c</in>
-                    </df>
-                  </df>
-                </df>
-                <df name="MemMang">
-                  <in>heap_4.c</in>
-                </df>
-              </df>
-              <in>croutine.c</in>
-              <in>event_groups.c</in>
-              <in>list.c</in>
-              <in>queue.c</in>
-              <in>tasks.c</in>
-              <in>timers.c</in>
-            </df>
-          </df>
           <df name="LwIP">
             <df name="src">
               <df name="api">
@@ -180,32 +155,15 @@
                 <in>slipif.c</in>
               </df>
             </df>
-            <df name="system">
-              <df name="OS">
-                <in>sys_arch.c</in>
-              </df>
-            </df>
           </df>
         </df>
       </df>
       <df name="Src">
         <in>ethernetif.c</in>
-        <in>freertos.c</in>
         <in>lwip.c</in>
         <in>main.c</in>
         <in>stm32f7xx_hal_msp.c</in>
-        <in>stm32f7xx_hal_timebase_TIM.c</in>
         <in>stm32f7xx_it.c</in>
-      </df>
-      <df name="SW4STM32">
-        <df name="nucleo-f746">
-          <df name="Application">
-            <df name="User">
-              <in>httpserver-netconn.c</in>
-              <in>temp.c</in>
-            </df>
-          </df>
-        </df>
       </df>
     </df>
     <logicalFolder name="ExternalFiles"
@@ -393,6 +351,10 @@
               <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
               <pElem>SW4STM32/nucleo-f746/Debug</pElem>
             </incDir>
+            <preprocessorList>
+              <Elem>DISABLE=0</Elem>
+              <Elem>ENABLE=1</Elem>
+            </preprocessorList>
           </cTool>
         </makeTool>
         <preBuild>
@@ -3418,51 +3380,6 @@
           </incDir>
         </cTool>
       </folder>
-      <folder path="0/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS">
-        <cTool>
-          <incDir>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</pElem>
-            <pElem>Drivers/CMSIS/Include</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
-            <pElem>Inc</pElem>
-            <pElem>SW4STM32/nucleo-f746/Debug</pElem>
-          </incDir>
-        </cTool>
-      </folder>
-      <folder path="0/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC">
-        <cTool>
-          <incDir>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
-            <pElem>Inc</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
-            <pElem>SW4STM32/nucleo-f746/Debug</pElem>
-          </incDir>
-        </cTool>
-      </folder>
-      <folder path="0/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang">
-        <cTool>
-          <incDir>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
-            <pElem>Inc</pElem>
-            <pElem>SW4STM32/nucleo-f746/Debug</pElem>
-          </incDir>
-        </cTool>
-      </folder>
       <folder path="0/Middlewares/Third_Party/LwIP/src/core/snmp">
         <cTool>
           <incDir>
@@ -3502,39 +3419,6 @@
             <pElem>Middlewares/Third_Party/LwIP/src/include</pElem>
             <pElem>Middlewares/Third_Party/LwIP/system</pElem>
             <pElem>SW4STM32/nucleo-f746/Debug</pElem>
-          </incDir>
-        </cTool>
-      </folder>
-      <folder path="0/Middlewares/Third_Party/LwIP/system">
-        <cTool>
-          <incDir>
-            <pElem>Middlewares/Third_Party/LwIP/system/OS</pElem>
-            <pElem>Middlewares/Third_Party/LwIP/system/arch</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
-            <pElem>Middlewares/Third_Party/LwIP/src/include/lwip</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</pElem>
-            <pElem>Drivers/CMSIS/Include</pElem>
-            <pElem>Inc</pElem>
-            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
-            <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
-            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
-            <pElem>Middlewares/Third_Party/LwIP/src/include</pElem>
-            <pElem>Middlewares/Third_Party/LwIP/system</pElem>
-            <pElem>SW4STM32/nucleo-f746/Debug</pElem>
-          </incDir>
-        </cTool>
-      </folder>
-      <folder path="0/SW4STM32">
-        <cTool>
-          <incDir>
-            <pElem>SW4STM32/nucleo-f746/Application/User</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
-            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
           </incDir>
         </cTool>
       </folder>
