@@ -34,6 +34,8 @@
 #include "cmsis_os.h"
 #include "../webpages/index.h"
 #include "temp.h"
+#include <math.h>
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -47,6 +49,19 @@ u32_t nPageHits = 0;
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+
+static char float_buf[15];
+
+static void float_to_str(float val, char * buf)
+{
+    int d1 = val; // Get the integer part (678).
+    float f2 = val - d1; // Get fractional part (0.01234567).
+    int d2 = trunc(f2 * 10000); // Turn into integer (123).
+//    float f3 = f2 * 10000 - d2; // Get next fractional part (0.4567).
+//    int d3 = trunc(f3 * 10000); // Turn into integer (4567).
+
+    sprintf(buf, "%d.%04d", d1, d2);
+}
 
 /**
   * @brief serve tcp connection  
@@ -93,7 +108,8 @@ void http_server_serve(struct netconn *conn)
     			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
     	  }
     	  if (strncmp((char const *)buf,"GET /adc", 8) == 0) {
-    		  sprintf(buf, "%2.1f °C", getMCUTemperature());
+              float_to_str(getMCUTemperature(), float_buf);
+    		  sprintf(buf, "%s °C", float_buf);
     		  netconn_write(conn, (const unsigned char*)buf, strlen(buf), NETCONN_NOCOPY);
     	  }
       }

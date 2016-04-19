@@ -35,13 +35,13 @@
 #include "cmsis_os.h"
 #include "lwip.h"
 
-
 /* USER CODE BEGIN Includes */
 #include "httpserver-netconn.h"
 #include "stm32f746xx.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
 
 UART_HandleTypeDef huart3;
 
@@ -59,6 +59,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
+static void MX_ADC1_Init(void);
 void StartDefaultTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
@@ -90,6 +91,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
   //MX_LWIP_Init();
+  MX_ADC1_Init();
 
   /* USER CODE BEGIN 2 */
 
@@ -186,6 +188,36 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
 }
 
+/* ADC1 init function */
+void MX_ADC1_Init(void)
+{
+
+  ADC_ChannelConfTypeDef sConfig;
+
+    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion) 
+    */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ClockPrescaler = ADC_CLOCKPRESCALER_PCLK_DIV2;
+  hadc1.Init.Resolution = ADC_RESOLUTION12b;
+  hadc1.Init.ScanConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+  hadc1.Init.EOCSelection = EOC_SINGLE_CONV;
+  HAL_ADC_Init(&hadc1);
+
+    /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
+    */
+  sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
+  sConfig.Rank = 1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
+  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+
+}
+
 /* USART3 init function */
 void MX_USART3_UART_Init(void)
 {
@@ -249,8 +281,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD3_Pin LD2_Pin */
-  GPIO_InitStruct.Pin = LD3_Pin|LD2_Pin;
+  /*Configure GPIO pins : PB0 LD3_Pin LD2_Pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|LD2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
@@ -270,7 +302,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(USB_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, LD3_Pin|LD2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|LD3_Pin|LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
