@@ -237,6 +237,10 @@
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
           <cTool flags="0">
+            <preprocessorList>
+              <Elem>DISABLE=0</Elem>
+              <Elem>ENABLE=1</Elem>
+            </preprocessorList>
           </cTool>
         </makeTool>
         <preBuild>
