@@ -50,6 +50,7 @@ PCD_HandleTypeDef hpcd_USB_OTG_FS;
 osThreadId defaultTaskHandle;
 
 /* USER CODE BEGIN PV */
+extern int vtask_main(UART_HandleTypeDef *uart);
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE END PV */
@@ -224,7 +225,7 @@ void MX_USART3_UART_Init(void)
 
   huart3.Instance = USART3;
   huart3.Init.BaudRate = 115200;
-  huart3.Init.WordLength = UART_WORDLENGTH_7B;
+  huart3.Init.WordLength = UART_WORDLENGTH_8B;
   huart3.Init.StopBits = UART_STOPBITS_1;
   huart3.Init.Parity = UART_PARITY_NONE;
   huart3.Init.Mode = UART_MODE_TX_RX;
@@ -321,10 +322,11 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN 5 */
   http_server_netconn_init();
+  vtask_main(&huart3);
   /* Infinite loop */
   for(;;)
   {
-    osDelay(1);
+    osDelay(1000);
     HAL_UART_Transmit(&huart3, "Test\r\n",6,100);
   }
   /* USER CODE END 5 */ 
