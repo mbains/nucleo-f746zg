@@ -29,9 +29,61 @@
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/LwIP/src/netif/ppp/randm.c</location>
 		</link><link>
-			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_rtc.c</name>
+			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_adc.c</name>
 			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc.c</location>
+			<location>PARENT-2-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc.c</location>
+		</link><link>
+			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_adc_ex.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_adc_ex.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/cmsis_os.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c</location>
+		</link><link>
+			<name>Application/User/freertos.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/freertos.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/queue.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/queue.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/timers.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/timers.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/list.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/list.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/tasks.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/tasks.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/port.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/croutine.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/croutine.c</location>
+		</link><link>
+			<name>Application/User/stm32f7xx_hal_timebase_TIM.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Src/stm32f7xx_hal_timebase_TIM.c</location>
+		</link><link>
+			<name>Middlewares/LwIP/sys_arch.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/LwIP/system/OS/sys_arch.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/heap_4.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c</location>
+		</link><link>
+			<name>Middlewares/FreeRTOS/event_groups.c</name>
+			<type>1</type>
+			<location>PARENT-2-PROJECT_LOC/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c</location>
 		</link><link>
 			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_uart.c</name>
 			<type>1</type>
@@ -300,10 +352,6 @@
 			<name>Application/User/main.c</name>
 			<type>1</type>
 			<location>PARENT-2-PROJECT_LOC/Src/main.c</location>
-		</link><link>
-			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_rtc_ex.c</name>
-			<type>1</type>
-			<location>PARENT-2-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc_ex.c</location>
 		</link><link>
 			<name>Middlewares/LwIP/pap.c</name>
 			<type>1</type>
