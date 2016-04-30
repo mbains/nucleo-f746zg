@@ -198,6 +198,11 @@
         <df name="nucleo-f746">
           <df name="Application">
             <df name="User">
+              <df name="freertos-examples">
+                <df name="tasks">
+                  <in>vtask.c</in>
+                </df>
+              </df>
               <in>httpserver-netconn.c</in>
               <in>temp.c</in>
             </df>
@@ -237,10 +242,6 @@
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
           <cTool flags="0">
-            <preprocessorList>
-              <Elem>DISABLE=0</Elem>
-              <Elem>ENABLE=1</Elem>
-            </preprocessorList>
           </cTool>
         </makeTool>
         <preBuild>
@@ -3423,12 +3424,23 @@
         <cTool flags="0">
         </cTool>
       </item>
+      <item path="SW4STM32/nucleo-f746/Application/User/freertos-examples/tasks/vtask.c"
+            ex="false"
+            tool="0"
+            flavor2="2">
+        <cTool flags="0">
+        </cTool>
+      </item>
       <item path="SW4STM32/nucleo-f746/Application/User/httpserver-netconn.c"
             ex="false"
             tool="0"
             flavor2="2">
         <cTool flags="0">
           <incDir>
+            <pElem>SW4STM32/nucleo-f746/Application/User</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
+            <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
             <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
             <pElem>Middlewares/Third_Party/LwIP/system/arch</pElem>
@@ -3455,6 +3467,10 @@
             flavor2="2">
         <cTool flags="0">
           <incDir>
+            <pElem>SW4STM32/nucleo-f746/Application/User</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
+            <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
             <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
             <pElem>Drivers/CMSIS/Include</pElem>
             <pElem>Inc</pElem>
@@ -3744,6 +3760,26 @@
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
             <pElem>Drivers/CMSIS/Device/ST/STM32F7xx/Include</pElem>
           </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/SW4STM32/nucleo-f746/Application/User/freertos-examples">
+        <cTool>
+          <incDir>
+            <pElem>SW4STM32/nucleo-f746/Application/User/freertos-examples/tasks</pElem>
+            <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
+            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
+            <pElem>Drivers/CMSIS/Include</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
+            <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
+            <pElem>Inc</pElem>
+            <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
+            <pElem>SW4STM32/nucleo-f746/Debug</pElem>
+          </incDir>
+          <preprocessorList>
+            <Elem>DISABLE=0</Elem>
+            <Elem>ENABLE=1</Elem>
+          </preprocessorList>
         </cTool>
       </folder>
       <folder path="0/Src">
