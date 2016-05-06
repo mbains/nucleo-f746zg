@@ -38,8 +38,6 @@
 
 /* Private define ------------------------------------------------------------*/
 
-#define User_Blue_Button_Pin GPIO_PIN_13
-#define User_Blue_Button_GPIO_Port GPIOC
 #define MCO_Pin GPIO_PIN_0
 #define MCO_GPIO_Port GPIOH
 #define RMII_MDC_Pin GPIO_PIN_1

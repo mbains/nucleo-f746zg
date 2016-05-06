@@ -102,10 +102,10 @@ void http_server_serve(struct netconn *conn)
     		  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
     	  }
     	  if (strncmp((char const *)buf,"GET /btn1", 9) == 0) {
-    		  if(HAL_GPIO_ReadPin(User_Blue_Button_GPIO_Port, User_Blue_Button_Pin) == GPIO_PIN_SET)
-    			  netconn_write(conn, (const unsigned char*)"ON", 2, NETCONN_NOCOPY);
-    		  else
-    			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
+//    		  if(HAL_GPIO_ReadPin(User_Blue_Button_GPIO_Port, User_Blue_Button_Pin) == GPIO_PIN_SET)
+//    			  netconn_write(conn, (const unsigned char*)"ON", 2, NETCONN_NOCOPY);
+//    		  else
+//    			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
     	  }
     	  if (strncmp((char const *)buf,"GET /adc", 8) == 0) {
               float_to_str(getMCUTemperature(), float_buf);

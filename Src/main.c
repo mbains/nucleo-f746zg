@@ -94,6 +94,7 @@ int main(void)
   MX_ADC1_Init();
 
   /* USER CODE BEGIN 2 */
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   /* USER CODE END 2 */
 
@@ -275,11 +276,11 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
-  /*Configure GPIO pin : User_Blue_Button_Pin */
-  GPIO_InitStruct.Pin = User_Blue_Button_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB0 LD3_Pin LD2_Pin */
   GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|LD2_Pin;
@@ -310,6 +311,11 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void EXTI15_10_IRQHandler(void) {
+    __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
+    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+}
 
 /* USER CODE END 4 */
 
