@@ -95,6 +95,7 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
   /* USER CODE END 2 */
 
@@ -314,7 +315,16 @@ void MX_GPIO_Init(void)
 
 void EXTI15_10_IRQHandler(void) {
     __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
-    HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+    xQueueHandle btn_q = http_get_btn_queue();
+    if(btn_q) {
+        BaseType_t highPriTaskWoken = pdFALSE;
+        int data_ = 42;
+        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+        xQueueSendFromISR(btn_q, &data_, &highPriTaskWoken);
+        
+        //portEND_SWITCHING_ISR(highPriTaskWoken);
+        
+    }
 }
 
 /* USER CODE END 4 */

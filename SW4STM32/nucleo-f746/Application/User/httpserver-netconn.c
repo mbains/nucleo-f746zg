@@ -34,6 +34,7 @@
 #include "cmsis_os.h"
 #include "../webpages/index.h"
 #include "temp.h"
+#include <queue.h>
 #include <math.h>
 
 
@@ -51,6 +52,25 @@ u32_t nPageHits = 0;
 /* Private functions ---------------------------------------------------------*/
 
 static char float_buf[15];
+static xQueueHandle m_queue_handle;
+
+static int block_on_queue(int block_ms) 
+{
+    const portTickType xTicksToWait = block_ms/portTICK_RATE_MS;
+    char data = 0;
+    portBASE_TYPE xStatus = xQueueReceive(m_queue_handle, &data, xTicksToWait);
+    
+    if(xStatus == pdPASS) 
+    {
+        return data;
+    }
+    else 
+    {
+        return -1;
+    }
+    
+}
+
 
 static void float_to_str(float val, char * buf)
 {
@@ -101,16 +121,19 @@ void http_server_serve(struct netconn *conn)
     	  if (strncmp((char const *)buf,"GET /led3", 9) == 0) {
     		  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
     	  }
+    	  if (strncmp((char const *)buf,"GET /irq", 8) == 0) 
+          {    
+              int data = block_on_queue(500);
+              sprintf(buf, "%d   ", data);
+              netconn_write(conn, (const unsigned char *)buf, strlen(buf), NETCONN_NOCOPY); 			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
+    	  }
     	  if (strncmp((char const *)buf,"GET /btn1", 9) == 0) {
-//    		  if(HAL_GPIO_ReadPin(User_Blue_Button_GPIO_Port, User_Blue_Button_Pin) == GPIO_PIN_SET)
-//    			  netconn_write(conn, (const unsigned char*)"ON", 2, NETCONN_NOCOPY);
-//    		  else
-//    			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
+              netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
     	  }
     	  if (strncmp((char const *)buf,"GET /adc", 8) == 0) {
               float_to_str(getMCUTemperature(), float_buf);
-    		  sprintf(buf, "%s °C", float_buf);
-    		  netconn_write(conn, (const unsigned char*)buf, strlen(buf), NETCONN_NOCOPY);
+              sprintf(buf, "%s °C", float_buf);
+              netconn_write(conn, (const unsigned char*)buf, strlen(buf), NETCONN_NOCOPY);
     	  }
       }
     }
@@ -170,5 +193,16 @@ static void http_server_netconn_thread()
   */
 void http_server_netconn_init()
 {
+  m_queue_handle = xQueueCreate(100/*len*/,4/*size*/);
   sys_thread_new("HTTP", http_server_netconn_thread, NULL, DEFAULT_THREAD_STACKSIZE, WEBSERVER_THREAD_PRIO);
 }
+
+/**
+ * 
+ * @return the queue handle for button pressed
+ */
+xQueueHandle http_get_btn_queue() 
+{
+    return m_queue_handle;
+}
+
