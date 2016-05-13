@@ -52,7 +52,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN PV */
 extern int vtask_main(UART_HandleTypeDef *uart);
 /* Private variables ---------------------------------------------------------*/
-
+static int btn_counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -309,21 +309,38 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
 
-void EXTI15_10_IRQHandler(void) {
-    __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
-    xQueueHandle btn_q = http_get_btn_queue();
+//void EXTI15_10_IRQHandler(void) {
+//    __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
+//    xQueueHandle btn_q = http_get_btn_queue();
+//    if(btn_q) {
+//        BaseType_t highPriTaskWoken = pdFALSE;
+//        int data_ = 42;
+//        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+//        xQueueSendFromISR(btn_q, &data_, &highPriTaskWoken);
+//        
+//        //portEND_SWITCHING_ISR(highPriTaskWoken);
+//        
+//    }
+//}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) 
+{
+     xQueueHandle btn_q = http_get_btn_queue();
     if(btn_q) {
         BaseType_t highPriTaskWoken = pdFALSE;
-        int data_ = 42;
+        btn_counter++;
         HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
-        xQueueSendFromISR(btn_q, &data_, &highPriTaskWoken);
+        xQueueSendFromISR(btn_q, &btn_counter, &highPriTaskWoken);
         
         //portEND_SWITCHING_ISR(highPriTaskWoken);
-        
     }
 }
 

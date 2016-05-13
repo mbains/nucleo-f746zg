@@ -57,7 +57,7 @@ static xQueueHandle m_queue_handle;
 static int block_on_queue(int block_ms) 
 {
     const portTickType xTicksToWait = block_ms/portTICK_RATE_MS;
-    char data = 0;
+    int data = 0;
     portBASE_TYPE xStatus = xQueueReceive(m_queue_handle, &data, xTicksToWait);
     
     if(xStatus == pdPASS) 
@@ -123,9 +123,10 @@ void http_server_serve(struct netconn *conn)
     	  }
     	  if (strncmp((char const *)buf,"GET /irq", 8) == 0) 
           {    
-              int data = block_on_queue(500);
+              int data = block_on_queue(5000);
               sprintf(buf, "%d   ", data);
-              netconn_write(conn, (const unsigned char *)buf, strlen(buf), NETCONN_NOCOPY); 			  netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
+              netconn_write(conn, (const unsigned char *)buf, strlen(buf), NETCONN_NOCOPY);
+              netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
     	  }
     	  if (strncmp((char const *)buf,"GET /btn1", 9) == 0) {
               netconn_write(conn, (const unsigned char*)"OFF", 3, NETCONN_NOCOPY);
