@@ -29,13 +29,16 @@
         $.get("adc", function(res) {
            $("#mcu-temp").find("b").html(res);           
         }); 
-	   setTimeout(refreshValues, 250); 
+            if(window.keepgoing == true) {
+                setTimeout(refreshValues, 250); 
+            }
 	}
 	setTimeout(refreshValues, 250);
   });
   
   
 </script>
+<script src="http://192.168.2.100:8000/index.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
 </head>
 <body>
