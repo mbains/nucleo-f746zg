@@ -337,7 +337,6 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     if(btn_q) {
         BaseType_t highPriTaskWoken = pdFALSE;
         btn_counter++;
-        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
         xQueueSendFromISR(btn_q, &btn_counter, &highPriTaskWoken);
         
         //portEND_SWITCHING_ISR(highPriTaskWoken);

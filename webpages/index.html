@@ -14,31 +14,42 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <script type="text/javascript">
   $(document).ready(function() {
+    var led_request = 0;
   	$(".led").click(function(e) {
-  	    $.get($(this).attr("id"));
+        var val = parseInt($(this).attr('id').split('led')[1]);
+        if($(this).hasClass('btn-default')) {
+            $(this).removeClass('btn-default');
+            $(this).addClass('btn-pressed');
+            led_request |= (1 << val);
+        } else {
+            $(this).addClass('btn-default');
+            $(this).removeClass('btn-pressed');
+            led_request ^= (1 << val)
+        }
   	});
 	function refreshValues() {
-       $.get("btn1", function(res) {
-           if(res == "OFF")
-           	 $("#usr-btn").removeClass("alert-success").addClass("alert-info");
-           else
-             $("#usr-btn").removeClass("alert-info").addClass("alert-success");
-             
-           $("#usr-btn").find("b").html(res);           
-        }); 
-        $.get("adc", function(res) {
-           $("#mcu-temp").find("b").html(res);           
-        }); 
-            if(window.keepgoing == true) {
-                setTimeout(refreshValues, 250); 
+		
+        $.get("irq/"+led_request, function(res) {
+            var split_result = res.split(' ');
+            var temp = split_result[0];
+            var switch_count = split_result[1];
+            
+            $('#mcu-temp').find("b").html(temp);
+            if(switch_count != '-1') {
+                $('#usr-btn').text(switch_count);
             }
+            
+            setTimeout(refreshValues, 0); 
+        });
+        
+        
 	}
-	setTimeout(refreshValues, 250);
+	setTimeout(refreshValues, 110);
   });
   
   
 </script>
-<script src="http://192.168.2.100:8000/index.js"></script>
+<!--<script src="http://192.168.2.100:8000/index.js"></script>-->
 <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
 </head>
 <body>
@@ -48,13 +59,13 @@
 	  <div class="panel-body">
 	    <div class="row">
 		  <div class="col-md-6 cell">
-		     <button type="button" class="btn btn-default btn-block led" id="led1">LED1</button>
+		     <button type="button" class="btn btn-default btn-block led" id="led0">LED1</button>
 		  </div>
 		  <div class="col-md-6 cell">
-		  	 <button type="button" class="btn btn-default btn-block led" id="led2">LED2</button>
+		  	 <button type="button" class="btn btn-default btn-block led" id="led1">LED2</button>
 		  </div>	  	 
 		  <div class="col-md-6 cell">
-		  	 <button type="button" class="btn btn-default btn-block led" id="led3">LED3</button>
+		  	 <button type="button" class="btn btn-default btn-block led" id="led2">LED3</button>
 		  </div>
 		</div>
 	  </div>
