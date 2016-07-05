@@ -3554,6 +3554,7 @@
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/machine</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include</pElem>
             <pElem>Drivers/STM32F7xx_HAL_Driver/Inc</pElem>
+            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
             <pElem>Middlewares/Third_Party/FreeRTOS/Source/include</pElem>
             <pElem>Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS</pElem>
             <pElem>Drivers/CMSIS/Include</pElem>
@@ -3561,7 +3562,6 @@
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/lib/gcc/arm-none-eabi/4.9.3/include</pElem>
             <pElem>../../Ac6/SystemWorkbench/plugins/fr.ac6.mcu.externaltools.arm-none.linux64_1.3.0.201507241112/tools/compiler/arm-none-eabi/include/sys</pElem>
             <pElem>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</pElem>
-            <pElem>Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1</pElem>
             <pElem>Middlewares/Third_Party/LwIP/src/include/lwip</pElem>
             <pElem>Middlewares/Third_Party/LwIP/system/arch</pElem>
             <pElem>Middlewares/Third_Party/LwIP/src/include/netif</pElem>

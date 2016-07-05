@@ -52,7 +52,7 @@ osThreadId defaultTaskHandle;
 /* USER CODE BEGIN PV */
 extern int vtask_main(UART_HandleTypeDef *uart);
 /* Private variables ---------------------------------------------------------*/
-
+static int btn_counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -94,6 +94,8 @@ int main(void)
   MX_ADC1_Init();
 
   /* USER CODE BEGIN 2 */
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
 
   /* USER CODE END 2 */
 
@@ -275,11 +277,11 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOG_CLK_ENABLE();
 
-  /*Configure GPIO pin : User_Blue_Button_Pin */
-  GPIO_InitStruct.Pin = User_Blue_Button_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pin : PC13 */
+  GPIO_InitStruct.Pin = GPIO_PIN_13;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(User_Blue_Button_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB0 LD3_Pin LD2_Pin */
   GPIO_InitStruct.Pin = GPIO_PIN_0|LD3_Pin|LD2_Pin;
@@ -307,9 +309,39 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
 
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
 }
 
 /* USER CODE BEGIN 4 */
+
+//void EXTI15_10_IRQHandler(void) {
+//    __HAL_GPIO_EXTI_CLEAR_FLAG(GPIO_PIN_13);
+//    xQueueHandle btn_q = http_get_btn_queue();
+//    if(btn_q) {
+//        BaseType_t highPriTaskWoken = pdFALSE;
+//        int data_ = 42;
+//        HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
+//        xQueueSendFromISR(btn_q, &data_, &highPriTaskWoken);
+//        
+//        //portEND_SWITCHING_ISR(highPriTaskWoken);
+//        
+//    }
+//}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) 
+{
+     xQueueHandle btn_q = http_get_btn_queue();
+    if(btn_q) {
+        BaseType_t highPriTaskWoken = pdFALSE;
+        btn_counter++;
+        xQueueSendFromISR(btn_q, &btn_counter, &highPriTaskWoken);
+        
+        //portEND_SWITCHING_ISR(highPriTaskWoken);
+    }
+}
 
 /* USER CODE END 4 */
 
