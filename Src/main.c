@@ -57,6 +57,7 @@ static int btn_counter;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void Error_Handler(void);
 static void MX_GPIO_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
@@ -165,9 +166,15 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 216;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 9;
-  HAL_RCC_OscConfig(&RCC_OscInitStruct);
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
-  HAL_PWREx_EnableOverDrive();
+  if (HAL_PWREx_EnableOverDrive() != HAL_OK)
+  {
+    Error_Handler();
+  }
 
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -175,12 +182,18 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV8;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV4;
-  HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7);
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USART3|RCC_PERIPHCLK_CLK48;
   PeriphClkInitStruct.Usart3ClockSelection = RCC_USART3CLKSOURCE_PCLK1;
   PeriphClkInitStruct.Clk48ClockSelection = RCC_CLK48SOURCE_PLL;
-  HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
   HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
 
@@ -191,7 +204,7 @@ void SystemClock_Config(void)
 }
 
 /* ADC1 init function */
-void MX_ADC1_Init(void)
+static void MX_ADC1_Init(void)
 {
 
   ADC_ChannelConfTypeDef sConfig;
@@ -209,19 +222,25 @@ void MX_ADC1_Init(void)
   hadc1.Init.NbrOfConversion = 1;
   hadc1.Init.DMAContinuousRequests = DISABLE;
   hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
-  HAL_ADC_Init(&hadc1);
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
     /**Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time. 
     */
   sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
-  HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 
 /* USART3 init function */
-void MX_USART3_UART_Init(void)
+static void MX_USART3_UART_Init(void)
 {
 
   huart3.Instance = USART3;
@@ -234,16 +253,19 @@ void MX_USART3_UART_Init(void)
   huart3.Init.OverSampling = UART_OVERSAMPLING_16;
   huart3.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
   huart3.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
-  HAL_UART_Init(&huart3);
+  if (HAL_UART_Init(&huart3) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 
 /* USB_OTG_FS init function */
-void MX_USB_OTG_FS_PCD_Init(void)
+static void MX_USB_OTG_FS_PCD_Init(void)
 {
 
   hpcd_USB_OTG_FS.Instance = USB_OTG_FS;
-  hpcd_USB_OTG_FS.Init.dev_endpoints = 7;
+  hpcd_USB_OTG_FS.Init.dev_endpoints = 6;
   hpcd_USB_OTG_FS.Init.speed = PCD_SPEED_FULL;
   hpcd_USB_OTG_FS.Init.dma_enable = DISABLE;
   hpcd_USB_OTG_FS.Init.ep0_mps = DEP0CTL_MPS_64;
@@ -253,7 +275,10 @@ void MX_USB_OTG_FS_PCD_Init(void)
   hpcd_USB_OTG_FS.Init.lpm_enable = DISABLE;
   hpcd_USB_OTG_FS.Init.vbus_sensing_enable = ENABLE;
   hpcd_USB_OTG_FS.Init.use_dedicated_ep1 = DISABLE;
-  HAL_PCD_Init(&hpcd_USB_OTG_FS);
+  if (HAL_PCD_Init(&hpcd_USB_OTG_FS) != HAL_OK)
+  {
+    Error_Handler();
+  }
 
 }
 
@@ -264,7 +289,7 @@ void MX_USB_OTG_FS_PCD_Init(void)
         * EVENT_OUT
         * EXTI
 */
-void MX_GPIO_Init(void)
+static void MX_GPIO_Init(void)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
@@ -361,6 +386,42 @@ void StartDefaultTask(void const * argument)
     HAL_UART_Transmit(&huart3, "Test\r\n",6,100);
   }
   /* USER CODE END 5 */ 
+}
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM1 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+/* USER CODE BEGIN Callback 0 */
+
+/* USER CODE END Callback 0 */
+  if (htim->Instance == TIM1) {
+    HAL_IncTick();
+  }
+/* USER CODE BEGIN Callback 1 */
+
+/* USER CODE END Callback 1 */
+}
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler */
+  /* User can add his own implementation to report the HAL error return state */
+  while(1) 
+  {
+  }
+  /* USER CODE END Error_Handler */ 
 }
 
 #ifdef USE_FULL_ASSERT
