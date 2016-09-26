@@ -32,3 +32,4 @@
 *.dSYM/
 
 nbproject/private
+SW4STM32/nucleo-f746/.settings/language.settings.xml
